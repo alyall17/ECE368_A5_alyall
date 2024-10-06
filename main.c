@@ -21,7 +21,7 @@ treeNode* newNode(int x, int y){
     return node;
 }
 
-// Calculated the height of a node
+// Calculated the height of a node (from lecture slides)
 int height(treeNode* node){
     if(node == NULL) return -1;
     return node->height;
@@ -65,6 +65,7 @@ treeNode* rotateLR(treeNode* current){
     return rotateR(current);
 }
 
+// Balance tree using AVL (from lecture slides)
 treeNode* balance(treeNode* node){
     if(node == NULL) return node;
     
@@ -89,7 +90,7 @@ treeNode* balance(treeNode* node){
     return node;    
 }
 
-// Add a point (x, y) to the tree and balance it
+// Add a point (x, y) to the tree and balance it (modified from lecture slides)
 treeNode* add(treeNode* node, int x, int y){
     if(node == NULL){
         return(newNode(x, y));
@@ -129,4 +130,35 @@ int countPoints(treeNode* node, int cx, int cy, int r){
     count += countPoints(node->right, cx, cy, r);
 
     return count;
+}
+
+int main(int argc, char* argv[]){
+    // LOCAL VARIABLES
+    FILE* file = fopen(argv[1], "r"); // File to read data from
+    treeNode* root = NULL; // Root of tree
+    int x; // x-coordinate
+    int y; // y-coordinate
+
+    // EXECUTABLE STATEMENTS
+    // Read from file and insert into the tree
+    while(fscanf(file, "%d %d", &x, &y) != EOF){
+        root = add(root, x, y);
+    }
+
+    fclose(file); // Close file
+
+    // Handle collision queries from stdin
+    while(1){
+        printf("> ");
+        int cx;
+        int cy;
+        int r;
+        if(scanf("%d %d %d", &cx, &cy, &r) != 3) break;
+
+        // count the number of points inside the given circle
+        int count = countPoints(root, cx, cy, r);
+        printf("%d\n", count);
+    }
+
+    return(0);
 }
