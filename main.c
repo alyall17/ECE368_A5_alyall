@@ -91,5 +91,20 @@ treeNode* balance(treeNode* node){
 
 // Add a point (x, y) to the tree and balance it
 treeNode* add(treeNode* node, int x, int y){
+    if(node == NULL){
+        return(newNode(x, y));
+    }
 
+    // Add new node to left or right subtree based on x (& y if x values are equal)
+    if(x < node->x || (x == node->x && y < node->y)){
+        node->left = add(node->left, x, y);
+    }
+    else if(x > node->x || (x == node->x && y > node->y)){
+        node->right = add(node->right, x, y);
+    }
+
+    // Update height and balance
+    node->height = fmax(height(node->left), height(node->right)) + 1;
+    return balance(node);
 }
+
