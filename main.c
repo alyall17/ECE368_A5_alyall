@@ -108,3 +108,25 @@ treeNode* add(treeNode* node, int x, int y){
     return balance(node);
 }
 
+// Check if a point (x1, y1) is inside a circle with radius r and center (cx, cy)
+int inCircle(int cx, int cy, int r, int x1, int y1){
+    int x = x1 - cx;
+    int y = y1 - cy;
+    return (x * x + y * y) <= (r * r);
+}
+
+// Counts points inside a given circle with radius r and center (cx, cy)
+int countPoints(treeNode* node, int cx, int cy, int r){
+    if(node == NULL) return 0;
+
+    int count = 0; // Total count of points in circle
+
+    if(inCircle(cx, cy, r, node->x, node->y)){
+        count++;
+    }
+
+    count += countPoints(node->left, cx, cy, r);
+    count += countPoints(node->right, cx, cy, r);
+
+    return count;
+}
