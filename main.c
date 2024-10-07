@@ -161,16 +161,16 @@ int main(void){
     fclose(file); // Close file
 
     // Handle collision queries from stdin
-    while(1){
+    //while(1){
         int cx;
         int cy;
         int r;
-        if(scanf("%d %d %d", &cx, &cy, &r) != 3) break;
+        if(scanf("%d %d %d", &cx, &cy, &r) != 3); //break;
 
         // count the number of points inside the given circle
         int count = countPoints(root, cx, cy, r);
         printf("%d\n", count);
-    }
+    //}
 
     freeTree(root);
 
