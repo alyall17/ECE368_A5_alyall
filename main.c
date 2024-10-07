@@ -132,6 +132,17 @@ int countPoints(treeNode* node, int cx, int cy, int r){
     return count;
 }
 
+void freeTree(treeNode* node){
+    if(node == NULL) return;
+
+    // Recursively free left and right subtrees
+    freeTree(node->left);
+    freeTree(node->right);
+
+    // Free current node
+    free(node);
+}
+
 int main(void){
     // LOCAL VARIABLES
     char name[100];
@@ -160,6 +171,8 @@ int main(void){
         int count = countPoints(root, cx, cy, r);
         printf("%d\n", count);
     }
+
+    freeTree(root);
 
     return(0);
 }
