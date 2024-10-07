@@ -132,9 +132,11 @@ int countPoints(treeNode* node, int cx, int cy, int r){
     return count;
 }
 
-int main(int argc, char* argv[]){
+int main(void){
     // LOCAL VARIABLES
-    FILE* file = fopen(argv[1], "r"); // File to read data from
+    char name[100];
+    scanf("%s", name);
+    FILE* file = fopen(name, "r"); // File to read data from
     treeNode* root = NULL; // Root of tree
     int x; // x-coordinate
     int y; // y-coordinate
@@ -149,7 +151,6 @@ int main(int argc, char* argv[]){
 
     // Handle collision queries from stdin
     while(1){
-        printf("> ");
         int cx;
         int cy;
         int r;
