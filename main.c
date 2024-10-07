@@ -34,8 +34,8 @@ treeNode* rotateR(treeNode* current){
     new->right = current;
 
     // Updates heights of current and new
-    current->height = fmax(height(current->left), height(current->right)) + 1;
-    new->height = fmax(height(new->left), height(new->right)) + 1;
+    current->height = max(height(current->left), height(current->right)) + 1;
+    new->height = max(height(new->left), height(new->right)) + 1;
 
     return(new);
 }
@@ -47,8 +47,8 @@ treeNode* rotateL(treeNode* current){
     new->left = current;
 
     // Update heights of current and new
-    current->height =fmax(height(current->left), height(current->right)) + 1;
-    new->height = fmax(height(new->left), height(new->right)) + 1;
+    current->height =max(height(current->left), height(current->right)) + 1;
+    new->height = max(height(new->left), height(new->right)) + 1;
 
     return(new);
 }
@@ -105,7 +105,7 @@ treeNode* add(treeNode* node, int x, int y){
     }
 
     // Update height and balance
-    node->height = fmax(height(node->left), height(node->right)) + 1;
+    node->height = max(height(node->left), height(node->right)) + 1;
     return balance(node);
 }
 
