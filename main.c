@@ -168,10 +168,6 @@ int main(void){
         int r;
         if(scanf("%d %d %d", &cx, &cy, &r) != 3) break;
 
-        if (cx == -1 && cy == -1 && r == -1) {
-            break;
-        }
-
         // count the number of points inside the given circle
         int count = countPoints(root, cx, cy, r);
         printf("%d\n", count);

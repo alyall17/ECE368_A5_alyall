@@ -7,8 +7,11 @@ OBJS = $(SRCS:%.c=%.o)
 
 # diff -w means do not care about space
 
-a5: $(OBJS) 
-	$(GCC) $(OBJS) -o a5
+
+a5: main.c
+	gcc -o a5 main.c
+#a5: $(OBJS) 
+#	$(GCC) $(OBJS) -o a5
 
 .c.o: 
 	$(GCC) -c $*.c
