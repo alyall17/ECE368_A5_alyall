@@ -135,8 +135,6 @@ int countPoints(treeNode* node, int cx, int cy, int r){
     else{
        return count + countPoints(node->left, cx, cy, r) + countPoints(node->right, cx, cy, r);
     }
-
-    return count;
 }
 
 // Frees tree memory
