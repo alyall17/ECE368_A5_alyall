@@ -117,17 +117,51 @@ int inCircle(int cx, int cy, int r, int x1, int y1){
 }
 
 // Counts points inside a given circle with radius r and center (cx, cy)
-int countPoints(treeNode* node, int cx, int cy, int r){
-    if(node == NULL) return 0;
+int countPoints(treeNode* root, int cx, int cy, int r){
+    if(root == NULL) return 0;
 
     int count = 0; // Total count of points in circle
+    int stackSize = 1; // Size of stack
+    int top = -1; // Top of stack
+    treeNode** stack = (treeNode**)malloc(stackSize * sizeof(treeNode*));
 
-    if(inCircle(cx, cy, r, node->x, node->y)){
-        count++;
+    stack[++top] = root;
+
+    while(top >= 0){
+        treeNode* node = stack[top--]; // Pop from stack
+
+        // Check if point is inside circle
+        if(inCircle(cx, cy, r, node->x, node->y)){
+            count++;
+        }
+
+        // Push right child to stack
+        if(node->right){
+            if(top + 1 == stackSize){
+                stackSize *= 2;
+                stack = (treeNode**)realloc(stack, stackSize * sizeof(treeNode*));
+            }
+        stack[++top] = node->right;
+        }
+
+        // Push left child to stack
+        if(node->left){
+            if(top + 1 == stackSize){
+                stackSize *= 2;
+                stack = (treeNode**)realloc(stack, stackSize * sizeof(treeNode*));
+            }
+        stack[++top] = node->left;
+        }
     }
 
-    count += countPoints(node->left, cx, cy, r);
-    count += countPoints(node->right, cx, cy, r);
+    //if(inCircle(cx, cy, r, node->x, node->y)){
+        //count++;
+    //}
+
+    //count += countPoints(node->left, cx, cy, r);
+    //count += countPoints(node->right, cx, cy, r);
+
+    free(stack);
 
     return count;
 }
@@ -155,8 +189,6 @@ int main(int argc, char *argv[]){
     // Read from file and insert into the tree
     while(fscanf(file, "%d %d", &x, &y) != EOF){
         root = add(root, x, y);
-        //printf("%d ", x);
-        //printf("%d\n", y);
     }
 
     fclose(file); // Close file
@@ -175,16 +207,6 @@ int main(int argc, char *argv[]){
         if(numArgs != 3){
             break;
         }
-
-        //printf("%d", 1);
-        //int n = scanf("%d %d %d", &cx, &cy, &r);
-        //printf("%d\n", n);
-
-        //if(n != 3){
-            //freeTree(root);
-            //return(0);
-            //break;
-        //};
 
         // Count the number of points inside the given circle
         int count = countPoints(root, cx, cy, r);
