@@ -157,15 +157,15 @@ int main(void){
     // Read from file and insert into the tree
     while(fscanf(file, "%d %d", &x, &y) != EOF){
         root = add(root, x, y);
-        printf("%d ", x);
-        printf("%d\n", y);
+        //printf("%d ", x);
+        //printf("%d\n", y);
     }
 
     fclose(file); // Close file
 
-        int cx; // current x-coordinate (loop)
-        int cy; // current y-coordinate (loop)
-        int r; // Radius (loop)
+    int cx; // current x-coordinate (loop)
+    int cy; // current y-coordinate (loop)
+    int r; // Radius (loop)
 
     // Handle collision queries from stdin
     while(scanf("%d %d %d", &cx, &cy, &r) == 3){
