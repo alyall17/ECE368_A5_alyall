@@ -91,16 +91,16 @@ treeNode* balance(treeNode* node){
 }
 
 // Add a point (x, y) to the tree and balance it (modified from lecture slides)
+
 treeNode* add(treeNode* node, int x, int y){
     if(node == NULL){
         return(newNode(x, y));
     }
-
     // Add new node to left or right subtree based on x (& y if x values are equal)
     else if(x < node->x || (x == node->x && y < node->y)){
         node->left = add(node->left, x, y);
     }
-    else if(x > node->x || (x == node->x && y > node->y)){
+    else if(x >= node->x || (x == node->x && y > node->y)){
         node->right = add(node->right, x, y);
     }
 
@@ -123,13 +123,18 @@ int countPoints(treeNode* node, int cx, int cy, int r){
     int count = 0; // Total count of points in circle
 
     if(inCircle(cx, cy, r, node->x, node->y)){
-        count++;
+        count = 1;
     }
 
-    count += countPoints(node->left, cx, cy, r);
-    count += countPoints(node->right, cx, cy, r);
-
-    return count;
+    if(node->x > (cx + r)){
+        return count + countPoints(node->left, cx, cy, r);
+    }
+    else if(node->x < (cx - r)){
+        return count + countPoints(node->right, cx, cy, r);
+    }
+    else{
+        return count + countPoints(node->left, cx, cy, r) + countPoints(node->right, cx, cy, r);
+    }
 }
 
 // Frees tree memory
@@ -144,6 +149,21 @@ void freeTree(treeNode* node){
     free(node);
 }
 
+// Print tree
+void printTree(treeNode* root){
+    if (root != NULL) {
+
+        printf("T %d, %d\n", root->x, root->y);
+
+        printTree(root->left);
+
+        
+        printTree(root->right);
+
+        
+    }
+}
+
 int main(int argc, char *argv[]){
     // LOCAL VARIABLES
     FILE* file = fopen(argv[1], "r"); // File to read data from
@@ -155,7 +175,12 @@ int main(int argc, char *argv[]){
     // Read from file and insert into the tree
     while(fscanf(file, "%d %d", &x, &y) != EOF){
         root = add(root, x, y);
+
+        // printTree(root);
+        // printf("----\n ");
     }
+
+    
 
     fclose(file); // Close file
 
@@ -175,8 +200,8 @@ int main(int argc, char *argv[]){
         }
 
         // Count the number of points inside the given circle
-        int count = countPoints(root, cx, cy, r);
-        printf("%d\n", count);
+       int count = countPoints(root, cx, cy, r);
+       printf("%d\n", count);
     }
     // Free tree
     freeTree(root);
