@@ -105,7 +105,7 @@ treeNode* add(treeNode* node, int x, int y){
     }
 
     // Update height and balance
- //   node->height = height(node->left) > height(node->right) ? height(node->left) : height(node->right) + 1;
+    node->height = height(node->left) > height(node->right) ? height(node->left) : height(node->right) + 1;
     return balance(node);
 }
 
@@ -133,8 +133,10 @@ int countPoints(treeNode* node, int cx, int cy, int r){
         return count + countPoints(node->right, cx, cy, r);
     }
     else{
-        return count + countPoints(node->left, cx, cy, r) + countPoints(node->right, cx, cy, r);
+       return count + countPoints(node->left, cx, cy, r) + countPoints(node->right, cx, cy, r);
     }
+
+    return count;
 }
 
 // Frees tree memory
