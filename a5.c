@@ -168,7 +168,7 @@ int main(void){
         int r; // Radius (loop)
 
     // Handle collision queries from stdin
-    while(scanf("%d %d %d", &cx, &cy, &r) != EOF){
+    while(scanf("%d %d %d", &cx, &cy, &r) == 3){
 
         //printf("%d", 1);
         //int n = fscanf("%d %d %d", &cx, &cy, &r);
