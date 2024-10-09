@@ -170,7 +170,7 @@ int main(void){
     // Handle collision queries from stdin
     while(scanf("%d %d %d", &cx, &cy, &r)){
 
-        printf("%d", 1);
+        //printf("%d", 1);
         //int n = fscanf("%d %d %d", &cx, &cy, &r);
         //printf("%d\n", n);
 
