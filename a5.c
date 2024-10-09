@@ -144,11 +144,9 @@ void freeTree(treeNode* node){
     free(node);
 }
 
-int main(void){
+int main(int argc, char *argv[]){
     // LOCAL VARIABLES
-    char name[100];
-    scanf("%s", name);
-    FILE* file = fopen(name, "r"); // File to read data from
+    FILE* file = fopen(argv[1], "r"); // File to read data from
     treeNode* root = NULL; // Root of tree
     int x; // x-coordinate
     int y; // y-coordinate
@@ -167,8 +165,16 @@ int main(void){
     int cy; // current y-coordinate (loop)
     int r; // Radius (loop)
 
+
     // Handle collision queries from stdin
-    while(scanf("%d %d %d", &cx, &cy, &r) == 3){
+    char line[100];
+    while(fgets(line, 100, stdin) != NULL){
+
+        int numArgs = sscanf(line, "%d %d %d\n", &cx, &cy, &r);
+
+        if(numArgs != 3){
+            break;
+        }
 
         //printf("%d", 1);
         //int n = scanf("%d %d %d", &cx, &cy, &r);
