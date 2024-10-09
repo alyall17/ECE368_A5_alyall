@@ -105,7 +105,7 @@ treeNode* add(treeNode* node, int x, int y){
     }
 
     // Update height and balance
-    node->height = height(node->left) > height(node->right) ? height(node->left) : height(node->right) + 1;
+ //   node->height = height(node->left) > height(node->right) ? height(node->left) : height(node->right) + 1;
     return balance(node);
 }
 
@@ -117,51 +117,17 @@ int inCircle(int cx, int cy, int r, int x1, int y1){
 }
 
 // Counts points inside a given circle with radius r and center (cx, cy)
-int countPoints(treeNode* root, int cx, int cy, int r){
-    if(root == NULL) return 0;
+int countPoints(treeNode* node, int cx, int cy, int r){
+    if(node == NULL) return 0;
 
     int count = 0; // Total count of points in circle
-    int stackSize = 1; // Size of stack
-    int top = -1; // Top of stack
-    treeNode** stack = (treeNode**)malloc(stackSize * sizeof(treeNode*));
 
-    stack[++top] = root;
-
-    while(top >= 0){
-        treeNode* node = stack[top--]; // Pop from stack
-
-        // Check if point is inside circle
-        if(inCircle(cx, cy, r, node->x, node->y)){
-            count++;
-        }
-
-        // Push right child to stack
-        if(node->right){
-            if(top + 1 == stackSize){
-                stackSize *= 2;
-                stack = (treeNode**)realloc(stack, stackSize * sizeof(treeNode*));
-            }
-        stack[++top] = node->right;
-        }
-
-        // Push left child to stack
-        if(node->left){
-            if(top + 1 == stackSize){
-                stackSize *= 2;
-                stack = (treeNode**)realloc(stack, stackSize * sizeof(treeNode*));
-            }
-        stack[++top] = node->left;
-        }
+    if(inCircle(cx, cy, r, node->x, node->y)){
+        count++;
     }
 
-    //if(inCircle(cx, cy, r, node->x, node->y)){
-        //count++;
-    //}
-
-    //count += countPoints(node->left, cx, cy, r);
-    //count += countPoints(node->right, cx, cy, r);
-
-    free(stack);
+    count += countPoints(node->left, cx, cy, r);
+    count += countPoints(node->right, cx, cy, r);
 
     return count;
 }
