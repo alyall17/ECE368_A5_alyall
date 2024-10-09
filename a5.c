@@ -161,18 +161,19 @@ int main(void){
 
     fclose(file); // Close file
 
-    // Handle collision queries from stdin
-    while(1){
         int cx; // current x-coordinate (loop)
         int cy; // current y-coordinate (loop)
         int r; // Radius (loop)
 
-        int n = fscanf("%d %d %d", &cx, &cy, &r);
+    // Handle collision queries from stdin
+    while(scanf("%d %d %d", &cx, &cy, &r)){
+
+        //int n = fscanf("%d %d %d", &cx, &cy, &r);
         //printf("%d\n", n);
 
-        if(n != 3){
-           break;
-        };
+        //if(n != 0){
+         //  break;
+        //};
 
         // Count the number of points inside the given circle
         int count = countPoints(root, cx, cy, r);
