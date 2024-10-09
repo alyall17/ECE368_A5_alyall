@@ -163,16 +163,22 @@ int main(void){
 
     // Handle collision queries from stdin
     while(1){
-        int cx;
-        int cy;
-        int r;
-        if(scanf("%d %d %d", &cx, &cy, &r) != 3) break;
+        int cx; // current x-coordinate (loop)
+        int cy; // current y-coordinate (loop)
+        int r; // Radius (loop)
 
-        // count the number of points inside the given circle
+        int n = fscanf("%d %d %d", &cx, &cy, &r);
+        //printf("%d\n", n);
+
+        if(n != 3){
+           break;
+        };
+
+        // Count the number of points inside the given circle
         int count = countPoints(root, cx, cy, r);
         printf("%d\n", count);
     }
-
+    // Free tree
     freeTree(root);
 
     return(0);
