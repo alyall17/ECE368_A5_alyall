@@ -97,7 +97,7 @@ treeNode* add(treeNode* node, int x, int y){
     }
 
     // Add new node to left or right subtree based on x (& y if x values are equal)
-    if(x < node->x || (x == node->x && y < node->y)){
+    else if(x < node->x || (x == node->x && y < node->y)){
         node->left = add(node->left, x, y);
     }
     else if(x > node->x || (x == node->x && y > node->y)){
