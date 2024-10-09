@@ -171,11 +171,13 @@ int main(void){
     while(scanf("%d %d %d", &cx, &cy, &r) == 3){
 
         //printf("%d", 1);
-        //int n = fscanf("%d %d %d", &cx, &cy, &r);
+        //int n = scanf("%d %d %d", &cx, &cy, &r);
         //printf("%d\n", n);
 
-        //if(n != 0){
-         //  break;
+        //if(n != 3){
+            //freeTree(root);
+            //return(0);
+            //break;
         //};
 
         // Count the number of points inside the given circle
@@ -184,6 +186,5 @@ int main(void){
     }
     // Free tree
     freeTree(root);
-
     return(0);
 }
