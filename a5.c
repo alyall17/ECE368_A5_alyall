@@ -157,6 +157,8 @@ int main(void){
     // Read from file and insert into the tree
     while(fscanf(file, "%d %d", &x, &y) != EOF){
         root = add(root, x, y);
+        printf("%d ", x);
+        printf("%d\n", y);
     }
 
     fclose(file); // Close file
@@ -168,6 +170,7 @@ int main(void){
     // Handle collision queries from stdin
     while(scanf("%d %d %d", &cx, &cy, &r)){
 
+        printf("%d", 1);
         //int n = fscanf("%d %d %d", &cx, &cy, &r);
         //printf("%d\n", n);
 
