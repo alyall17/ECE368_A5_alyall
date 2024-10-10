@@ -91,7 +91,6 @@ treeNode* balance(treeNode* node){
 }
 
 // Add a point (x, y) to the tree and balance it (modified from lecture slides)
-
 treeNode* add(treeNode* node, int x, int y){
     if(node == NULL){
         return(newNode(x, y));
@@ -149,15 +148,6 @@ void freeTree(treeNode* node){
     free(node);
 }
 
-// Print tree
-void printTree(treeNode* root){
-    if (root != NULL) {
-        printf("T %d, %d\n", root->x, root->y);
-        printTree(root->left);       
-        printTree(root->right);   
-    }
-}
-
 int main(int argc, char *argv[]){
     // LOCAL VARIABLES
     FILE* file = fopen(argv[1], "r"); // File to read data from
@@ -169,12 +159,7 @@ int main(int argc, char *argv[]){
     // Read from file and insert into the tree
     while(fscanf(file, "%d %d", &x, &y) != EOF){
         root = add(root, x, y);
-
-        // printTree(root);
-        // printf("----\n ");
     }
-
-    
 
     fclose(file); // Close file
 

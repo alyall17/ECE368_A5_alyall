@@ -19,6 +19,3 @@ run: a5
 
 clean: # remove all machine generated files
 	rm -f a5 *.o output* *~
-
-#Build: a5.c
-#	gcc a5.c -o a5.exe
