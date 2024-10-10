@@ -34,8 +34,8 @@ treeNode* rotateR(treeNode* current){
     new->right = current;
 
     // Updates heights of current and new
-    current->height = height(current->left) > height(current->right) ? height(current->left) : height(current->right) + 1;
-    new->height = height(new->left) > height(new->right) ? height(new->left) : height(new->right) + 1;
+    current->height = (height(current->left) > height(current->right) ? height(current->left) : height(current->right)) + 1;
+    new->height = (height(new->left) > height(new->right) ? height(new->left) : height(new->right)) + 1;
 
     return(new);
 }
@@ -47,8 +47,8 @@ treeNode* rotateL(treeNode* current){
     new->left = current;
 
     // Update heights of current and new
-    current->height = height(current->left) > height(current->right) ? height(current->left) : height(current->right) + 1;
-    new->height = height(new->left) > height(new->right) ? height(new->left) : height(new->right) + 1;
+    current->height = (height(current->left) > height(current->right) ? height(current->left) : height(current->right)) + 1;
+    new->height = (height(new->left) > height(new->right) ? height(new->left) : height(new->right)) + 1;
 
     return(new);
 }
@@ -152,15 +152,9 @@ void freeTree(treeNode* node){
 // Print tree
 void printTree(treeNode* root){
     if (root != NULL) {
-
         printf("T %d, %d\n", root->x, root->y);
-
-        printTree(root->left);
-
-        
-        printTree(root->right);
-
-        
+        printTree(root->left);       
+        printTree(root->right);   
     }
 }
 
